@@ -135,7 +135,7 @@
 
     var catElement = document.createElement('div');
     catElement.className = 'cat';
-    catElement.textContent = 'Котик в мешочке!';
+    catElement.textContent = 'Раньше был котик, а теперь Кот в мешке :(!';
     var catImage = document.createElement('div');
     catImage.className = 'image';
     catElement.appendChild(catImage);

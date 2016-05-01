@@ -102,8 +102,8 @@ body {
 }
 
 .task .image{
-    height: 600px;
-    width: 480px;
+    height: 340px;
+    width: 100%;
     margin: 0 auto;
     background-repeat: no-repeat;
     background-position: center;
