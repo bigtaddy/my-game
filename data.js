@@ -607,7 +607,7 @@
                         categoryId: 3,
                         points: 400,
                         image: null,
-                        description: 'Какие выделяют виды подлога?',
+                        description: 'Что представляет из себя подчистка документов?',
                         isCat: false,
                         isAuction: false,
                         isWatched: false
