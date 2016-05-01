@@ -1,4 +1,4 @@
-(function (global) {
+﻿(function (global) {
 
     function showElement(element) {
         element.classList.remove('hidden');
@@ -24,14 +24,14 @@
             var item = cellElementItem.cloneNode();
             item.dataset.id = task.id;
             item.dataset.categoryId = task.categoryId;
-            item.innerText = task.points;
+            item.textContent = task.points;
             return item;
         }
 
         function createRow(category) {
             var row = rowElement.cloneNode();
             var cell = cellElementDescription.cloneNode();
-            cell.innerText = category.description;
+            cell.textContent = category.description;
             row.appendChild(cell);
 
             category.tasks.forEach(function (task) {
@@ -48,29 +48,36 @@
         return tableElement;
     }
 
-    var content = document.querySelector('#content');
-    var tableElement = createTable(global.Categories);
-    content.appendChild(tableElement);
-
-    var taskElement =  document.createElement('div');
-    taskElement.className = 'task';
-    hideElement(taskElement);
-    content.appendChild(taskElement);
-
-    var catElement = document.createElement('div');
-    catElement.className = 'cat';
-    catElement.innerText = 'Котик в мешочке!';
-    hideElement(catElement);
-    content.appendChild(catElement);
 
 
+    function tableClickHandler (event) {
+        event.stopPropagation();
+        var targetElement = event.target;
+        if (targetElement.classList.contains('item')) {
+            targetElement.textContent = '';
+
+            var id = parseInt(targetElement.dataset.id, 10);
+            var categoryId = parseInt(targetElement.dataset.categoryId, 10);
+            var task = categories[categoryId].tasks[id];
+
+            if (task && !task.isWatched) {
+                task.isWatched = true;
+                hideElement(tableElement);
+                showTask(task);
+            }
+
+        }
+    }
 
     function initTaskElement(task) {
         if (task.image) {
+            var image = taskImage.cloneNode();
+            taskImage.style.backgroundImage = 'url(./images/' + task.image + ')';
+            showElement(taskImage);
         } else {
-            taskElement.innerText = task.description;
+            hideElement(taskImage);
         }
-        return taskElement;
+        taskLabel.textContent = task.description;
     }
 
     function taskClickHandler(event) {
@@ -88,36 +95,84 @@
         document.body.addEventListener('click', taskClickHandler);
     }
 
+    function auctionClickHandler(event) {
+        event.stopPropagation();
+        hideElement(auctionElement);
+        showElement(taskElement);
+        document.body.removeEventListener('click', auctionClickHandler);
+        document.body.addEventListener('click', taskClickHandler);
+    }
+
     function showTask(task) {
         initTaskElement(task);
 
         if (task.isCat) {
             showElement(catElement);
             document.body.addEventListener('click', catClickHandler);
+        } else if(task.isAuction) {
+            showElement(auctionElement);
+            document.body.addEventListener('click', auctionClickHandler)
         } else {
             showElement(taskElement);
             document.body.addEventListener('click', taskClickHandler);
         }
     }
 
-    tableElement.addEventListener('click', function (event) {
-        event.stopPropagation();
+
+    var content = document.querySelector('#content');
+    var categories = [];
+    var taskElement =  document.createElement('div');
+    taskElement.className = 'task';
+    var taskImage = document.createElement('div');
+    taskImage.className = 'image';
+    var taskLabel = document.createElement('div');
+    taskLabel.className = 'label';
+    taskElement.appendChild(taskLabel);
+    hideElement(taskImage);
+    taskElement.appendChild(taskImage);
+    hideElement(taskElement);
+    content.appendChild(taskElement);
+
+    var catElement = document.createElement('div');
+    catElement.className = 'cat';
+    catElement.textContent = 'Котик в мешочке!';
+    var catImage = document.createElement('div');
+    catImage.className = 'image';
+    catElement.appendChild(catImage);
+    hideElement(catElement);
+    content.appendChild(catElement);
+
+    var auctionElement = document.createElement('div');
+    auctionElement.className = 'auction';
+    auctionElement.textContent = 'Аукцион!';
+    var auctionImage = document.createElement('div');
+    auctionImage.className = 'image';
+    auctionElement.appendChild(auctionImage);
+    hideElement(auctionElement);
+    content.appendChild(auctionElement);
+
+    var tableElement;
+
+    function createRound (number) {
+        categories = global.roundCategories[number];
+        tableElement = createTable(categories);
+        tableElement.addEventListener('click', tableClickHandler);
+        content.appendChild(tableElement);
+    }
+
+
+    var buttonsWrapper = document.body.querySelector('.buttons-wrapper');
+
+    function buttonClickHandler(event) {
         var targetElement = event.target;
-        if (targetElement.classList.contains('item')) {
-            targetElement.innerText = '';
-
-            var id = parseInt(targetElement.dataset.id, 10);
-            var categoryId = parseInt(targetElement.dataset.categoryId, 10);
-            var task = global.Categories[categoryId].tasks[id];
-
-            if (task && !task.isWatched) {
-                task.isWatched = true;
-                hideElement(tableElement);
-                showTask(task);
-            }
-
+        if(targetElement.classList.contains('button-start-round')) {
+            hideElement(buttonsWrapper);
+            createRound(parseInt(targetElement.dataset.id, 10));
+            document.body.removeEventListener('click', buttonClickHandler)
         }
-    })
+    }
+
+    document.body.addEventListener('click', buttonClickHandler)
 
 
 })(window);
