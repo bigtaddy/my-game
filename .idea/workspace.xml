@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="29ad5980-5e36-4982-8385-89d91c9b2509" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data.js" afterPath="$PROJECT_DIR$/data.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main.css" afterPath="$PROJECT_DIR$/main.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main.js" afterPath="$PROJECT_DIR$/main.js" />
     </list>
     <ignored path="game.iws" />
@@ -39,7 +38,7 @@
         <entry file="file://$PROJECT_DIR$/main.js">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="-9.620689">
-              <caret line="137" column="70" selection-start-line="137" selection-start-column="70" selection-end-line="137" selection-end-column="70" />
+              <caret line="137" column="41" selection-start-line="137" selection-start-column="41" selection-end-line="137" selection-end-column="41" />
               <folding />
             </state>
           </provider>
@@ -48,8 +47,8 @@
       <file leaf-file-name="data.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/data.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.20788531">
-              <caret line="609" column="66" selection-start-line="609" selection-start-column="66" selection-end-line="609" selection-end-column="66" />
+            <state vertical-scroll-proportion="0.8781362">
+              <caret line="666" column="35" selection-start-line="666" selection-start-column="35" selection-end-line="666" selection-end-column="35" />
               <folding>
                 <element signature="e#75#2547#0" expanded="false" />
                 <element signature="e#12490#14780#0" expanded="false" />
@@ -87,9 +86,9 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/index.html" />
-        <option value="$PROJECT_DIR$/main.js" />
         <option value="$PROJECT_DIR$/main.css" />
         <option value="$PROJECT_DIR$/data.js" />
+        <option value="$PROJECT_DIR$/main.js" />
       </list>
     </option>
   </component>
@@ -713,15 +712,15 @@
     <entry file="file://$PROJECT_DIR$/main.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-9.620689">
-          <caret line="137" column="70" selection-start-line="137" selection-start-column="70" selection-end-line="137" selection-end-column="70" />
+          <caret line="137" column="41" selection-start-line="137" selection-start-column="41" selection-end-line="137" selection-end-column="41" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/data.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.20788531">
-          <caret line="609" column="66" selection-start-line="609" selection-start-column="66" selection-end-line="609" selection-end-column="66" />
+        <state vertical-scroll-proportion="0.8781362">
+          <caret line="666" column="35" selection-start-line="666" selection-start-column="35" selection-end-line="666" selection-end-column="35" />
           <folding>
             <element signature="e#75#2547#0" expanded="false" />
             <element signature="e#12490#14780#0" expanded="false" />

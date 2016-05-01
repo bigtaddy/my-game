@@ -664,7 +664,7 @@
                         points: 400,
                         image: 'папиллярный_узор_400.png',
                         description: 'Какой папиллярный узор изображен на картинке?',
-                        isCat: false,
+                        isCat: true,
                         isAuction: false,
                         isWatched: false
                     },
