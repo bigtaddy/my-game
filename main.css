@@ -83,8 +83,8 @@ body {
 }
 
 .cat .image{
-    height: 300px;
-    width: 300px;
+    height: 400px;
+    width: 400px;
     margin: 0 auto;
     background: url('./images/cat.gif');
     background-repeat: no-repeat;
@@ -92,8 +92,8 @@ body {
     background-size: contain;
 }
 .auction .image{
-    height: 300px;
-    width: 300px;
+    height: 400px;
+    width: 400px;
     margin: 0 auto;
     background: url('./images/auction.jpeg') no-repeat center;
     background-repeat: no-repeat;
