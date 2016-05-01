@@ -1,18 +1,27 @@
-(function(global){
+(function (global) {
 
+    function showElement(element) {
+        element.classList.remove('hidden');
+        element.classList.add('visible');
+    }
 
-    function createTable (categories) {
+    function hideElement(element) {
+        element.classList.remove('visible');
+        element.classList.add('hidden');
+    }
+
+    function createTable(categories) {
         var tableElement = document.createElement('div');
         tableElement.className = 'grid';
-        var rowElement =  document.createElement('div');
+        var rowElement = document.createElement('div');
         rowElement.className = 'row';
-        var cellElementDescription =  document.createElement('div');
+        var cellElementDescription = document.createElement('div');
         cellElementDescription.className = 'cell description';
-        var cellElementItem =  document.createElement('div');
+        var cellElementItem = document.createElement('div');
         cellElementItem.className = 'cell item';
 
         function createCell(task) {
-            var item  = cellElementItem.cloneNode();
+            var item = cellElementItem.cloneNode();
             item.dataset.id = task.id;
             item.dataset.categoryId = task.categoryId;
             item.innerText = task.points;
@@ -21,7 +30,7 @@
 
         function createRow(category) {
             var row = rowElement.cloneNode();
-            var cell  = cellElementDescription.cloneNode();
+            var cell = cellElementDescription.cloneNode();
             cell.innerText = category.description;
             row.appendChild(cell);
 
@@ -39,56 +48,76 @@
         return tableElement;
     }
 
-    function createTaskElement(task) {
-        var taskElement = document.createElement('div');
-        taskElement.className = 'task';
-
-        if(task.image) {
-
-        } else {
-            taskElement.innerText = task.description;
-        }
-
-        return taskElement;
-    }
-
-
-
     var content = document.querySelector('#content');
     var tableElement = createTable(global.Categories);
     content.appendChild(tableElement);
-    var taskElement = null;
+
+    var taskElement =  document.createElement('div');
+    taskElement.className = 'task';
+    hideElement(taskElement);
+    content.appendChild(taskElement);
+
+    var catElement = document.createElement('div');
+    catElement.className = 'cat';
+    catElement.innerText = 'Котик в мешочке!';
+    hideElement(catElement);
+    content.appendChild(catElement);
 
 
-    function taskClickHandler (event) {
-        content.removeChild(taskElement);
-        tableElement.style.display = 'block';
+
+    function initTaskElement(task) {
+        if (task.image) {
+        } else {
+            taskElement.innerText = task.description;
+        }
+        return taskElement;
+    }
+
+    function taskClickHandler(event) {
+        event.stopPropagation();
+        hideElement(taskElement);
+        showElement(tableElement);
         document.body.removeEventListener('click', taskClickHandler);
     }
 
+    function catClickHandler(event) {
+        event.stopPropagation();
+        hideElement(catElement);
+        showElement(taskElement);
+        document.body.removeEventListener('click', catClickHandler);
+        document.body.addEventListener('click', taskClickHandler);
+    }
+
+    function showTask(task) {
+        initTaskElement(task);
+
+        if (task.isCat) {
+            showElement(catElement);
+            document.body.addEventListener('click', catClickHandler);
+        } else {
+            showElement(taskElement);
+            document.body.addEventListener('click', taskClickHandler);
+        }
+    }
 
     tableElement.addEventListener('click', function (event) {
         event.stopPropagation();
         var targetElement = event.target;
-        if(targetElement.classList.contains('item')) {
-            tableElement.style.display = 'none';
+        if (targetElement.classList.contains('item')) {
             targetElement.innerText = '';
 
             var id = parseInt(targetElement.dataset.id, 10);
             var categoryId = parseInt(targetElement.dataset.categoryId, 10);
             var task = global.Categories[categoryId].tasks[id];
 
-            if(task) {
-                taskElement = createTaskElement(task);
-                content.appendChild(taskElement);
-                document.body.addEventListener('click', taskClickHandler);
+            if (task && !task.isWatched) {
+                task.isWatched = true;
+                hideElement(tableElement);
+                showTask(task);
             }
 
         }
     })
-
-
-
 
 
 })(window);
